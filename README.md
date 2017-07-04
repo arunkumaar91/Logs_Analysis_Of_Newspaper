@@ -39,27 +39,22 @@ The database news contains three tables:
 
 Create reqerrors view using below query
 
-`create view reqerrors as` <br />
-`select to_char(l.time,'FMMonth FMDD FMYYYY') as date, cast(count(l.status) as float) as errors` <br />
-`from log l where status != '200 OK'` <br />
-`group by date` <br />
-`order by errors desc;` <br />
+create view reqerrors as select to_char(l.time,'FMMonth FMDD FMYYYY') as date, cast(count(l.status) as float) as errors
+from log l where status != '200 OK' group by date order by errors desc;
 
 Create reqtotal view using below query
 
-`create view reqtotal as` <br />
-`select to_char(l.time,'FMMonth FMDD FMYYYY') as date, cast(count(l.status) as float) as sum` <br />
-`from log l` <br />
-`group by date` <br />
-`order by sum desc;` <br />
+create view reqtotal as
+select to_char(l.time,'FMMonth FMDD FMYYYY') as date, cast(count(l.status) as float) as sum 
+from log l group by date order by sum desc;
 
 create calc view using below query
 
-`create view calc as` <br />
-`select re.date, ((re.errors/rt.sum) * 100) as percentage` <br />
-`from reqerrors re, reqtotal rt` <br />
-`where rt.date = re.date` <br />
-`order by percentage desc;` <br />
+create view calc as
+select re.date, ((re.errors/rt.sum) * 100) as percentage
+from reqerrors re, reqtotal rt
+where rt.date = re.date
+order by percentage desc;
 
 
 ### Running the Python Script
