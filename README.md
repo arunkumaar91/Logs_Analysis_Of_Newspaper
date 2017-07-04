@@ -39,11 +39,11 @@ The database news contains three tables:
 
 Create reqerrors view using below query
 
-`create view reqerrors as
-select to_char(l.time,'FMMonth FMDD FMYYYY') as date, cast(count(l.status) as float) as errors
-from log l where status != '200 OK'
-group by date
-order by errors desc;`
+`create view reqerrors as` <br />
+`select to_char(l.time,'FMMonth FMDD FMYYYY') as date, cast(count(l.status) as float) as errors` <br />
+`from log l where status != '200 OK'` <br />
+`group by date` <br />
+`order by errors desc;` <br />
 
 Create reqtotal view using below query
 
