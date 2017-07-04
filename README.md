@@ -47,19 +47,19 @@ Create reqerrors view using below query
 
 Create reqtotal view using below query
 
-`create view reqtotal as
-select to_char(l.time,'FMMonth FMDD FMYYYY') as date, cast(count(l.status) as float) as sum
-from log l
-group by date
-order by sum desc;`
+`create view reqtotal as` <br />
+`select to_char(l.time,'FMMonth FMDD FMYYYY') as date, cast(count(l.status) as float) as sum` <br />
+`from log l` <br />
+`group by date` <br />
+`order by sum desc;` <br />
 
 create calc view using below query
 
-`create view calc as
-select re.date, ((re.errors/rt.sum) * 100) as percentage
-from reqerrors re, reqtotal rt
-where rt.date = re.date
-order by percentage desc;`
+`create view calc as` <br />
+`select re.date, ((re.errors/rt.sum) * 100) as percentage` <br />
+`from reqerrors re, reqtotal rt` <br />
+`where rt.date = re.date` <br />
+`order by percentage desc;` <br />
 
 
 ### Running the Python Script
